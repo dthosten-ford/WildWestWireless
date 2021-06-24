@@ -13,7 +13,13 @@ package com.wildwestwireless;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 // Feel free to rename this class 
 public class PlanTest {
-	
+    @Test
+    public void testsCanRun() {
+
+        assertEquals(0.0, 3, 0.0);
+    }
 }

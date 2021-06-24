@@ -12,6 +12,11 @@ sourceSets {
             srcDirs = ['src']
         }
     }
+    test{
+        java{
+            srcDirs=['test']
+        }
+    }
 }
 dependencies {
     compile 'junit:junit:4.12'
