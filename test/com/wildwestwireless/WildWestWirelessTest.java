@@ -28,22 +28,27 @@ public class WildWestWirelessTest {
     }
 
     @Test
-    public void goldPlan_oneLine() {
+    public void getBill_goldPlan_oneLine() {
         assertEquals(49.95, subject.getBill(PlanType.GOLD_PLAN, 1), 0.0);
     }
 
     @Test
-    public void goldPlan_twoLines() {
+    public void getBill_goldPlan_twoLines() {
         assertEquals(64.45, subject.getBill(PlanType.GOLD_PLAN, 2), 0.0);
     }
 
     @Test
-    public void goldPlan_threeLines() {
+    public void getBill_goldPlan_threeLines() {
         assertEquals(78.95, subject.getBill(PlanType.GOLD_PLAN, 3), 0.0);
     }
 
     @Test
-    public void silverPlan_oneLine() {
+    public void getBill_silverPlan_oneLine() {
         assertEquals(29.95, subject.getBill(PlanType.SILVER_PLAN, 1), 0.0);
+    }
+
+    @Test
+    public void getBill_silverPlan_twoLines() {
+        assertEquals(51.45, subject.getBill(PlanType.SILVER_PLAN, 2), 0.0);
     }
 }
