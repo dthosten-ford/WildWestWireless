@@ -21,13 +21,20 @@ public class WildWestWirelessTest {
     public void goldPlan_oneLine() {
         WildWestWireless subject = new WildWestWireless();
 
-        assertEquals(49.95, subject.getBill(), 0.0);
+        assertEquals(49.95, subject.getBill(1), 0.0);
     }
 
     @Test
     public void goldPlan_twoLines() {
         WildWestWireless subject = new WildWestWireless();
 
-        assertEquals(64.45, subject.getBill(), 0.0);
+        assertEquals(64.45, subject.getBill(2), 0.0);
+    }
+
+    @Test
+    public void goldPlan_threeLines() {
+        WildWestWireless subject = new WildWestWireless();
+
+        assertEquals(78.95, subject.getBill(3), 0.0);
     }
 }
