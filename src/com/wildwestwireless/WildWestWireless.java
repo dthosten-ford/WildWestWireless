@@ -2,7 +2,10 @@ package com.wildwestwireless;
 
 public class WildWestWireless {
 
-    public Double getBill(int phoneLines) {
-        return 49.95 + (14.50 * (phoneLines - 1));
+    private double goldBaseLineCost = 49.95;
+    private double goldPerLineCost = 14.50;
+
+    public Double getBill(PlanType goldPlan, int phoneLines) {
+        return goldBaseLineCost + (goldPerLineCost * (phoneLines - 1));
     }
 }
