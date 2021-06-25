@@ -4,6 +4,6 @@ public class WildWestWireless {
 
     public Double getBill() {
 
-        return null;
+        return 49.95;
     }
 }

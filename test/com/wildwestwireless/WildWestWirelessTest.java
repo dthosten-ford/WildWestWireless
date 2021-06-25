@@ -15,12 +15,19 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-// Feel free to rename this class 
-public class PlanTest {
+public class WildWestWirelessTest {
+
     @Test
     public void goldPlan_oneLine() {
         WildWestWireless subject = new WildWestWireless();
-        Double bill = subject.getBill();
-        assertEquals(49.95, bill, 0.0);
+
+        assertEquals(49.95, subject.getBill(), 0.0);
+    }
+
+    @Test
+    public void goldPlan_twoLines() {
+        WildWestWireless subject = new WildWestWireless();
+
+        assertEquals(64.45, subject.getBill(), 0.0);
     }
 }
