@@ -11,30 +11,34 @@
 
 package com.wildwestwireless;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class WildWestWirelessTest {
+    private WildWestWireless subject;
+
+    //TODO Test for zero or fewer lines
+    //TODO add goldBill in tests
+
+    @Before
+    public void setUp() {
+        subject = new WildWestWireless();
+    }
 
     @Test
     public void goldPlan_oneLine() {
-        WildWestWireless subject = new WildWestWireless();
-
         assertEquals(49.95, subject.getBill(1), 0.0);
     }
 
     @Test
     public void goldPlan_twoLines() {
-        WildWestWireless subject = new WildWestWireless();
-
         assertEquals(64.45, subject.getBill(2), 0.0);
     }
 
     @Test
     public void goldPlan_threeLines() {
-        WildWestWireless subject = new WildWestWireless();
-
         assertEquals(78.95, subject.getBill(3), 0.0);
     }
 }
