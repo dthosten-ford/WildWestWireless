@@ -18,8 +18,9 @@ import static org.junit.Assert.assertEquals;
 // Feel free to rename this class 
 public class PlanTest {
     @Test
-    public void testsCanRun() {
-
-        assertEquals(0.0, 3, 0.0);
+    public void goldPlan_oneLine() {
+        WildWestWireless subject = new WildWestWireless();
+        Double bill = subject.getBill();
+        assertEquals(49.95, bill, 0.0);
     }
 }
