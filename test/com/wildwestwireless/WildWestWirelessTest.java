@@ -14,6 +14,7 @@ package com.wildwestwireless;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.wildwestwireless.PlanType.GOLD_PLAN;
 import static com.wildwestwireless.PlanType.SILVER_PLAN;
 import static org.junit.Assert.assertEquals;
 
@@ -30,17 +31,17 @@ public class WildWestWirelessTest {
 
     @Test
     public void getBill_goldPlan_oneLine() {
-        assertEquals(49.95, subject.getBill(PlanType.GOLD_PLAN, 1), 0.0);
+        assertEquals(49.95, subject.getBill(GOLD_PLAN, 1), 0.0);
     }
 
     @Test
     public void getBill_goldPlan_twoLines() {
-        assertEquals(64.45, subject.getBill(PlanType.GOLD_PLAN, 2), 0.0);
+        assertEquals(64.45, subject.getBill(GOLD_PLAN, 2), 0.0);
     }
 
     @Test
     public void getBill_goldPlan_threeLines() {
-        assertEquals(78.95, subject.getBill(PlanType.GOLD_PLAN, 3), 0.0);
+        assertEquals(78.95, subject.getBill(GOLD_PLAN, 3), 0.0);
     }
 
     @Test
@@ -59,8 +60,12 @@ public class WildWestWirelessTest {
     }
 
     @Test
-    public void getBill_silverPlanOrGoldPlan_zeroLines() {
+    public void getBill_hasPositiveLines() {
         assertEquals(0.0, subject.getBill(SILVER_PLAN, 0), 0.0);
-        assertEquals(0.0, subject.getBill(PlanType.GOLD_PLAN, 0), 0.0);
+        assertEquals(0.0, subject.getBill(SILVER_PLAN, -1), 0.0);
+        assertEquals(0.0, subject.getBill(SILVER_PLAN, -42), 0.0);
+        assertEquals(0.0, subject.getBill(GOLD_PLAN, 0), 0.0);
+        assertEquals(0.0, subject.getBill(GOLD_PLAN, -1), 0.0);
+        assertEquals(0.0, subject.getBill(GOLD_PLAN, -42), 0.0);
     }
 }
