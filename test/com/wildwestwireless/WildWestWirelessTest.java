@@ -21,9 +21,6 @@ import static org.junit.Assert.assertEquals;
 public class WildWestWirelessTest {
     private WildWestWireless subject;
 
-    //TODO Test fewer lines
-    //TODO add goldBill in tests
-
     @Before
     public void setUp() {
         subject = new WildWestWireless();
@@ -31,41 +28,46 @@ public class WildWestWirelessTest {
 
     @Test
     public void getBill_goldPlan_oneLine() {
-        assertEquals(49.95, subject.getBill(GOLD_PLAN, 1), 0.0);
+        assertEquals(49.95, subject.getBill(GOLD_PLAN, 1, 1), 0.0);
     }
 
     @Test
     public void getBill_goldPlan_twoLines() {
-        assertEquals(64.45, subject.getBill(GOLD_PLAN, 2), 0.0);
+        assertEquals(64.45, subject.getBill(GOLD_PLAN, 2, 1), 0.0);
     }
 
     @Test
     public void getBill_goldPlan_threeLines() {
-        assertEquals(78.95, subject.getBill(GOLD_PLAN, 3), 0.0);
+        assertEquals(78.95, subject.getBill(GOLD_PLAN, 3, 1), 0.0);
     }
 
     @Test
     public void getBill_silverPlan_oneLine() {
-        assertEquals(29.95, subject.getBill(SILVER_PLAN, 1), 0.0);
+        assertEquals(29.95, subject.getBill(SILVER_PLAN, 1, 1), 0.0);
     }
 
     @Test
     public void getBill_silverPlan_twoLines() {
-        assertEquals(51.45, subject.getBill(SILVER_PLAN, 2), 0.0);
+        assertEquals(51.45, subject.getBill(SILVER_PLAN, 2, 1), 0.0);
     }
 
     @Test
     public void getBill_silverPlan_threeLines() {
-        assertEquals(72.95, subject.getBill(SILVER_PLAN, 3), 0.0);
+        assertEquals(72.95, subject.getBill(SILVER_PLAN, 3, 1), 0.0);
     }
 
     @Test
     public void getBill_hasPositiveLines() {
-        assertEquals(0.0, subject.getBill(SILVER_PLAN, 0), 0.0);
-        assertEquals(0.0, subject.getBill(SILVER_PLAN, -1), 0.0);
-        assertEquals(0.0, subject.getBill(SILVER_PLAN, -42), 0.0);
-        assertEquals(0.0, subject.getBill(GOLD_PLAN, 0), 0.0);
-        assertEquals(0.0, subject.getBill(GOLD_PLAN, -1), 0.0);
-        assertEquals(0.0, subject.getBill(GOLD_PLAN, -42), 0.0);
+        assertEquals(0.0, subject.getBill(SILVER_PLAN, 0, 1), 0.0);
+        assertEquals(0.0, subject.getBill(SILVER_PLAN, -1, 1), 0.0);
+        assertEquals(0.0, subject.getBill(SILVER_PLAN, -42, 1), 0.0);
+        assertEquals(0.0, subject.getBill(GOLD_PLAN, 0, 1), 0.0);
+        assertEquals(0.0, subject.getBill(GOLD_PLAN, -1, 1), 0.0);
+        assertEquals(0.0, subject.getBill(GOLD_PLAN, -42, 1), 0.0);
+    }
+
+    @Test
+    public void getBill_hasExcessMinutes() {
+        assertEquals(50.40, subject.getBill(GOLD_PLAN, 1, 1001), 0.01);
     }
 }
