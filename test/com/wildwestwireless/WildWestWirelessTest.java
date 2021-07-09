@@ -51,4 +51,10 @@ public class WildWestWirelessTest {
     public void getBill_silverPlan_twoLines() {
         assertEquals(51.45, subject.getBill(PlanType.SILVER_PLAN, 2), 0.0);
     }
+
+    @Test
+    public void getBill_silverPlanAndGoldPlan_zeroLines() {
+        assertEquals(0.0, subject.getBill(PlanType.SILVER_PLAN, 0), 0.0);
+        assertEquals(0.0, subject.getBill(PlanType.GOLD_PLAN, 0), 0.0);
+    }
 }

@@ -12,10 +12,11 @@ public class WildWestWireless {
             case GOLD_PLAN:
                 return goldBaseLineCost + (goldPerLineCost * (phoneLines - 1));
             case SILVER_PLAN:
-                if(phoneLines > 1){
+                if (phoneLines > 1) {
                     return silverBaseLineCost + silverPerLineCost;
+                } else if(phoneLines == 1) {
+                    return silverBaseLineCost;
                 }
-                return silverBaseLineCost;
             default:
                 return 0.0;
         }
