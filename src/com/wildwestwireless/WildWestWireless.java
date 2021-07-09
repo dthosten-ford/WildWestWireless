@@ -8,15 +8,19 @@ public class WildWestWireless {
     private final double silverPerLineCost = 21.50;
 
     public Double getBill(PlanType goldPlan, int phoneLines) {
+        if (phoneLines < 1) return 0.0;
+
         switch (goldPlan) {
             case GOLD_PLAN:
-                return goldBaseLineCost + (goldPerLineCost * (phoneLines - 1));
+                if (phoneLines > 1) {
+                    return goldBaseLineCost + (goldPerLineCost * (phoneLines - 1));
+                }
+                return goldBaseLineCost;
             case SILVER_PLAN:
                 if (phoneLines > 1) {
                     return silverBaseLineCost + silverPerLineCost;
-                } else if(phoneLines == 1) {
-                    return silverBaseLineCost;
                 }
+                return silverBaseLineCost;
             default:
                 return 0.0;
         }

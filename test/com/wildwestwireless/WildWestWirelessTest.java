@@ -14,12 +14,13 @@ package com.wildwestwireless;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.wildwestwireless.PlanType.SILVER_PLAN;
 import static org.junit.Assert.assertEquals;
 
 public class WildWestWirelessTest {
     private WildWestWireless subject;
 
-    //TODO Test for zero or fewer lines
+    //TODO Test fewer lines
     //TODO add goldBill in tests
 
     @Before
@@ -44,17 +45,22 @@ public class WildWestWirelessTest {
 
     @Test
     public void getBill_silverPlan_oneLine() {
-        assertEquals(29.95, subject.getBill(PlanType.SILVER_PLAN, 1), 0.0);
+        assertEquals(29.95, subject.getBill(SILVER_PLAN, 1), 0.0);
     }
 
     @Test
     public void getBill_silverPlan_twoLines() {
-        assertEquals(51.45, subject.getBill(PlanType.SILVER_PLAN, 2), 0.0);
+        assertEquals(51.45, subject.getBill(SILVER_PLAN, 2), 0.0);
     }
 
     @Test
-    public void getBill_silverPlanAndGoldPlan_zeroLines() {
-        assertEquals(0.0, subject.getBill(PlanType.SILVER_PLAN, 0), 0.0);
+    public void getBill_silverPlan_threeLines() {
+        assertEquals(72.95, subject.getBill(SILVER_PLAN, 3), 0.0);
+    }
+
+    @Test
+    public void getBill_silverPlanOrGoldPlan_zeroLines() {
+        assertEquals(0.0, subject.getBill(SILVER_PLAN, 0), 0.0);
         assertEquals(0.0, subject.getBill(PlanType.GOLD_PLAN, 0), 0.0);
     }
 }
