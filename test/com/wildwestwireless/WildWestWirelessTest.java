@@ -69,6 +69,11 @@ public class WildWestWirelessTest {
     @Test
     public void getBill_hasExcessMinutes() {
         assertEquals(50.40, subject.getBill(GOLD_PLAN, 1, 1001), 0.01);
+        assertEquals(49.95, subject.getBill(GOLD_PLAN, 1, 999), 0.01);
+        assertEquals(49.95, subject.getBill(GOLD_PLAN, 1, 1000), 0.01);
+        assertEquals(54.45, subject.getBill(GOLD_PLAN, 1, 1010), 0.01);
         assertEquals(40.75, subject.getBill(SILVER_PLAN, 1, 520), 0.00);
+        assertEquals(29.95, subject.getBill(SILVER_PLAN, 1, 499), 0.00);
+        assertEquals(29.95, subject.getBill(SILVER_PLAN, 1, 500), 0.00);
     }
 }
