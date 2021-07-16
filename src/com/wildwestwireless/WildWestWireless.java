@@ -32,9 +32,6 @@ public class WildWestWireless {
     }
 
     private Double calculatePlan(int phoneLines, double baseLineCost, double perLineCost, double minutesUsed, PlanType planType) {
-        if (planType.equals(GOLD_PLAN))
-            return baseLineCost + (perLineCost * (phoneLines - 1)) + getRateForPlan(GOLD_PLAN, minutesUsed);
-        else
-            return baseLineCost + (perLineCost * (phoneLines - 1)) + getRateForPlan(SILVER_PLAN, minutesUsed);
+        return baseLineCost + (perLineCost * (phoneLines - 1)) + getRateForPlan(planType, minutesUsed);
     }
 }
