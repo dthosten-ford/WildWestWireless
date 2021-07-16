@@ -5,20 +5,22 @@ import static com.wildwestwireless.PlanType.SILVER_PLAN;
 
 public class WildWestWireless {
 
-    private final double goldBaseLineCost = 49.95;
-    private final double goldPerLineCost = 14.50;
-    private final double silverBaseLineCost = 29.95;
-    private final double silverPerLineCost = 21.50;
-    private final double goldIncludedMinutes = 1000.0;
-    private final double silverIncludedMinutes = 500.0;
+    private static final double GOLD_BASE_LINE_COST = 49.95;
+    private static final double GOLD_PER_LINE_COST = 14.50;
+    private static final double SILVER_BASE_LINE_COST = 29.95;
+    private static final double SILVER_PER_LINE_COST = 21.50;
+    private static final double GOLD_INCLUDED_MINUTES = 1000.0;
+    private static final double SILVER_INCLUDED_MINUTES = 500.0;
+    private static final double GOLD_MINUTES_RATE = 0.45;
+    private static final double SILVER_MINUTES_RATE = 0.54;
 
     public Double getBill(PlanType planType, int phoneLines, int minutesUsed) {
         if (phoneLines < 1) return 0.0;
         switch (planType) {
             case GOLD_PLAN:
-                return calculatePlan(phoneLines, goldBaseLineCost, goldPerLineCost, minutesUsed, GOLD_PLAN);
+                return calculatePlan(phoneLines, GOLD_BASE_LINE_COST, GOLD_PER_LINE_COST, minutesUsed, GOLD_PLAN);
             case SILVER_PLAN:
-                return calculatePlan(phoneLines, silverBaseLineCost, silverPerLineCost, minutesUsed, SILVER_PLAN);
+                return calculatePlan(phoneLines, SILVER_BASE_LINE_COST, SILVER_PER_LINE_COST, minutesUsed, SILVER_PLAN);
             default:
                 return 0.0;
         }
@@ -26,9 +28,9 @@ public class WildWestWireless {
 
     private double getRateForPlan(PlanType planType, double minutesUsed) {
         if (planType.equals(GOLD_PLAN))
-            return 0.45 * Math.max((minutesUsed - goldIncludedMinutes), 0);
+            return GOLD_MINUTES_RATE * Math.max((minutesUsed - GOLD_INCLUDED_MINUTES), 0);
         else
-            return 0.54 * Math.max((minutesUsed - silverIncludedMinutes), 0);
+            return SILVER_MINUTES_RATE * Math.max((minutesUsed - SILVER_INCLUDED_MINUTES), 0);
     }
 
     private Double calculatePlan(int phoneLines, double baseLineCost, double perLineCost, double minutesUsed, PlanType planType) {
