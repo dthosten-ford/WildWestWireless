@@ -14,13 +14,15 @@ class WildWestWireless {
                 PlanType.GOLD_PLAN,
                 planDetail
             )
-            PlanType.SILVER_PLAN -> calculatePlan(
+            PlanType.SILVER_PLAN -> {
+                planDetail.baseLineCost = SILVER_BASE_LINE_COST
+                calculatePlan(
                 SILVER_BASE_LINE_COST,
                 SILVER_PER_LINE_COST,
                 minutesUsed.toDouble(),
                 PlanType.SILVER_PLAN,
                 planDetail
-            )
+            ) }
             else -> 0.0
         }
     }
@@ -41,7 +43,7 @@ class WildWestWireless {
         planType: PlanType,
         planDetail: PlanDetail
     ): Double {
-        return baseLineCost + perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(planType, minutesUsed)
+        return planDetail.baseLineCost + perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(planType, minutesUsed)
     }
 
     companion object {
