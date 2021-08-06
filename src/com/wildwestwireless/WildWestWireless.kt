@@ -4,23 +4,28 @@ class WildWestWireless {
 
     fun getBill(planType: PlanType?, phoneLines: Int, minutesUsed: Int): Double {
         // TODO decide what to put in PlanDetails
-        val planDetail = PlanDetail(phoneLines = phoneLines, baseLineCost = GOLD_BASE_LINE_COST, perLineCost = GOLD_PER_LINE_COST)
 
-        return if (planDetail.phoneLines < 1) ZERO_COST else when (planType) {
+        return if (phoneLines < 1) ZERO_COST else when (planType) {
             PlanType.GOLD_PLAN -> calculatePlan(
-                GOLD_PER_LINE_COST,
-                minutesUsed.toDouble(),
                 PlanType.GOLD_PLAN,
-                planDetail
+                PlanDetail(
+                    phoneLines = phoneLines,
+                    baseLineCost = GOLD_BASE_LINE_COST,
+                    perLineCost = GOLD_PER_LINE_COST,
+                    minutesUsed =  minutesUsed.toDouble()
+                )
             )
             PlanType.SILVER_PLAN -> {
-                planDetail.baseLineCost = SILVER_BASE_LINE_COST
                 calculatePlan(
-                    SILVER_PER_LINE_COST,
-                    minutesUsed.toDouble(),
                     PlanType.SILVER_PLAN,
-                    planDetail
-                ) }
+                    PlanDetail(
+                        phoneLines = phoneLines,
+                        baseLineCost = SILVER_BASE_LINE_COST,
+                        perLineCost = SILVER_PER_LINE_COST,
+                        minutesUsed = minutesUsed.toDouble()
+                    )
+                )
+            }
             else -> 0.0
         }
     }
@@ -35,12 +40,13 @@ class WildWestWireless {
     }
 
     private fun calculatePlan(
-        perLineCost: Double,
-        minutesUsed: Double,
         planType: PlanType,
         planDetail: PlanDetail
     ): Double {
-        return planDetail.baseLineCost + perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(planType, minutesUsed)
+        return planDetail.baseLineCost + planDetail.perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(
+            planType,
+            planDetail.minutesUsed
+        )
     }
 
     companion object {
