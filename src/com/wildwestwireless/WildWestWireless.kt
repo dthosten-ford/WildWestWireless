@@ -6,7 +6,7 @@ class WildWestWireless {
         // TODO decide what to put in PlanDetails
         val planDetail = PlanDetail(phoneLines = phoneLines, baseLineCost = GOLD_BASE_LINE_COST)
 
-        return if (phoneLines < 1) ZERO_COST else when (planType) {
+        return if (planDetail.phoneLines < 1) ZERO_COST else when (planType) {
             PlanType.GOLD_PLAN -> calculatePlan(
                 GOLD_BASE_LINE_COST,
                 GOLD_PER_LINE_COST,
