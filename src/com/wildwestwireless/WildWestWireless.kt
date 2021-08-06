@@ -4,7 +4,7 @@ class WildWestWireless {
 
     fun getBill(planType: PlanType?, phoneLines: Int, minutesUsed: Int): Double {
         // TODO decide what to put in PlanDetails
-        val planDetail = PlanDetail(phoneLines = phoneLines)
+        val planDetail = PlanDetail(phoneLines = phoneLines, baseLineCost = GOLD_BASE_LINE_COST)
 
         return if (phoneLines < 1) ZERO_COST else when (planType) {
             PlanType.GOLD_PLAN -> calculatePlan(
