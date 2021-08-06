@@ -7,23 +7,23 @@ class WildWestWireless {
 
         return if (phoneLines < 1) ZERO_COST else when (planType) {
             PlanType.GOLD_PLAN -> calculatePlan(
-                PlanType.GOLD_PLAN,
-                PlanDetail(
-                    phoneLines = phoneLines,
-                    baseLineCost = GOLD_BASE_LINE_COST,
-                    perLineCost = GOLD_PER_LINE_COST,
-                    minutesUsed =  minutesUsed.toDouble()
-                )
+                    PlanDetail(
+                        phoneLines = phoneLines,
+                        baseLineCost = GOLD_BASE_LINE_COST,
+                        perLineCost = GOLD_PER_LINE_COST,
+                        minutesUsed =  minutesUsed.toDouble(),
+                            planType = PlanType.GOLD_PLAN
+                    )
             )
             PlanType.SILVER_PLAN -> {
                 calculatePlan(
-                    PlanType.SILVER_PLAN,
-                    PlanDetail(
-                        phoneLines = phoneLines,
-                        baseLineCost = SILVER_BASE_LINE_COST,
-                        perLineCost = SILVER_PER_LINE_COST,
-                        minutesUsed = minutesUsed.toDouble()
-                    )
+                        PlanDetail(
+                                phoneLines = phoneLines,
+                                baseLineCost = SILVER_BASE_LINE_COST,
+                                perLineCost = SILVER_PER_LINE_COST,
+                                minutesUsed = minutesUsed.toDouble(),
+                                planType = PlanType.SILVER_PLAN
+                        )
                 )
             }
             else -> 0.0
@@ -40,11 +40,10 @@ class WildWestWireless {
     }
 
     private fun calculatePlan(
-        planType: PlanType,
-        planDetail: PlanDetail
+            planDetail: PlanDetail
     ): Double {
         return planDetail.baseLineCost + planDetail.perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(
-            planType,
+            planDetail.planType,
             planDetail.minutesUsed
         )
     }
