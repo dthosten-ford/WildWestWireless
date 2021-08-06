@@ -4,10 +4,10 @@ class WildWestWireless {
 
     fun getBill(planType: PlanType?, phoneLines: Int, minutesUsed: Int): Double {
         // TODO decide what to put in PlanDetails
-        val planDetail = PlanDetail()
+        val planDetail = PlanDetail(phoneLines = phoneLines)
+
         return if (phoneLines < 1) ZERO_COST else when (planType) {
             PlanType.GOLD_PLAN -> calculatePlan(
-                phoneLines,
                 GOLD_BASE_LINE_COST,
                 GOLD_PER_LINE_COST,
                 minutesUsed.toDouble(),
@@ -15,7 +15,6 @@ class WildWestWireless {
                 planDetail
             )
             PlanType.SILVER_PLAN -> calculatePlan(
-                phoneLines,
                 SILVER_BASE_LINE_COST,
                 SILVER_PER_LINE_COST,
                 minutesUsed.toDouble(),
@@ -36,14 +35,13 @@ class WildWestWireless {
     }
 
     private fun calculatePlan(
-        phoneLines: Int,
         baseLineCost: Double,
         perLineCost: Double,
         minutesUsed: Double,
         planType: PlanType,
         planDetail: PlanDetail
     ): Double {
-        return baseLineCost + perLineCost * (phoneLines - 1) + getRateForPlan(planType, minutesUsed)
+        return baseLineCost + perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(planType, minutesUsed)
     }
 
     companion object {

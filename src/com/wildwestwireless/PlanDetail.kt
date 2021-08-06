@@ -1,5 +1,5 @@
 package com.wildwestwireless
 
-class PlanDetail {
+data class PlanDetail(val phoneLines: Int) {
 
 }
