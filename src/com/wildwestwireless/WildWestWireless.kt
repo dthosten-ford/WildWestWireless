@@ -2,32 +2,41 @@ package com.wildwestwireless
 
 class WildWestWireless {
 
-    fun getBill(planType: PlanType?, phoneLines: Int, minutesUsed: Int): Double {
-        // TODO decide what to put in PlanDetails
-
-        return if (phoneLines < 1) ZERO_COST else when (planType) {
-            PlanType.GOLD_PLAN -> calculatePlan(
-                    PlanDetail(
-                        phoneLines = phoneLines,
-                        baseLineCost = GOLD_BASE_LINE_COST,
-                        perLineCost = GOLD_PER_LINE_COST,
-                        minutesUsed =  minutesUsed.toDouble(),
-                            planType = PlanType.GOLD_PLAN
-                    )
-            )
-            PlanType.SILVER_PLAN -> {
-                calculatePlan(
-                        PlanDetail(
-                                phoneLines = phoneLines,
-                                baseLineCost = SILVER_BASE_LINE_COST,
-                                perLineCost = SILVER_PER_LINE_COST,
-                                minutesUsed = minutesUsed.toDouble(),
-                                planType = PlanType.SILVER_PLAN
-                        )
-                )
-            }
-            else -> 0.0
+    fun getBill(planType: PlanType, phoneLines: Int, minutesUsed: Int): Double {
+        val planCosts = PlanCost()
+        planCosts.baseLineCost = when (planType) {
+            PlanType.GOLD_PLAN -> GOLD_BASE_LINE_COST
+            else -> SILVER_BASE_LINE_COST
         }
+        planCosts.perLineCost = when (planType) {
+            PlanType.GOLD_PLAN -> GOLD_PER_LINE_COST
+            else -> SILVER_PER_LINE_COST
+        }
+        return if (phoneLines < 1) ZERO_COST else {
+            calculatePlanDetails(
+                phoneLines,
+                minutesUsed,
+                planCosts,
+                planType
+            )
+        }
+    }
+
+    private fun calculatePlanDetails(
+        phoneLines: Int,
+        minutesUsed: Int,
+        planCost: PlanCost,
+        planType: PlanType
+    ): Double {
+        return calculatePlan(
+            PlanDetail(
+                phoneLines = phoneLines,
+                baseLineCost = planCost.baseLineCost,
+                perLineCost = planCost.perLineCost,
+                minutesUsed = minutesUsed.toDouble(),
+                planType = planType
+            )
+        )
     }
 
     private fun getRateForPlan(planType: PlanType, minutesUsed: Double): Double {
@@ -40,7 +49,7 @@ class WildWestWireless {
     }
 
     private fun calculatePlan(
-            planDetail: PlanDetail
+        planDetail: PlanDetail
     ): Double {
         return planDetail.baseLineCost + planDetail.perLineCost * (planDetail.phoneLines - 1) + getRateForPlan(
             planDetail.planType,
